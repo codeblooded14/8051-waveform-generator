@@ -1,0 +1,71 @@
+A51 MACRO ASSEMBLER  PRACTICEFILE                                                         04/20/2023 12:51:12 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\practiceFile.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE practiceFile.asm SET(SMALL) DEBUG PRINT(.\Listings\practiceFile.lst) OB
+                      JECT(.\Objects\practiceFile.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+0000 75A0FF            2             MOV P2,#0FFH
+0003 758920            3             MOV TMOD,#20H
+0006 758DFA            4             MOV TH1,#0FAH
+0009 759850            5             MOV SCON,#50H
+000C D28E              6             SETB TR1
+000E 900034            7             MOV DPTR,#MYDATA
+0011 E4                8             H_1:    CLR A
+0012 93                9                             MOVC A,@A+DPTR
+0013 6005             10                             JZ B_1
+0015 1124             11                             ACALL SEND
+0017 A3               12                             INC DPTR
+0018 80F7             13                             SJMP H_1
+001A E5A0             14             B_1:    MOV A,P2
+001C 1124             15                             ACALL SEND
+001E 112C             16                             ACALL RECV
+0020 F590             17                             MOV P1,A
+0022 80F6             18                             SJMP B_1
+                      19             
+0024 F599             20             SEND:   MOV SBUF,A
+0026 30B5FD           21             H_2:    JNB T1,H_2
+0029 C299             22                             CLR TI
+002B 22               23                             RET
+                      24             
+002C 3098FD           25             RECV:   JNB RI,RECV
+002F E599             26                             MOV A,SBUF
+0031 C298             27                             CLR RI  
+0033 22               28                             RET
+0034 686F6500         29             MYDATA: DB "hoe",0
+                      30     END
+                                     
+A51 MACRO ASSEMBLER  PRACTICEFILE                                                         04/20/2023 12:51:12 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B_1. . . . . . . .  C ADDR   001AH   A   
+H_1. . . . . . . .  C ADDR   0011H   A   
+H_2. . . . . . . .  C ADDR   0026H   A   
+MYDATA . . . . . .  C ADDR   0034H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+RECV . . . . . . .  C ADDR   002CH   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+SEND . . . . . . .  C ADDR   0024H   A   
+T1 . . . . . . . .  B ADDR   00B0H.5 A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
